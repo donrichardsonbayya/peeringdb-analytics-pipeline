@@ -1,4 +1,4 @@
-# 🌐 PeeringDB Analytics Pipeline
+#  PeeringDB Analytics Pipeline
 
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Airflow](https://img.shields.io/badge/Apache%20Airflow-017CEE?style=for-the-badge&logo=apache-airflow&logoColor=white)](https://airflow.apache.org/)
@@ -8,7 +8,7 @@
 
 A comprehensive **data analytics pipeline** that processes PeeringDB infrastructure data to provide actionable business insights through interactive dashboards.
 
-## 📊 **Project Overview**
+##  **Project Overview**
 
 This project demonstrates a complete **end-to-end data pipeline** using modern data engineering tools:
 
@@ -19,14 +19,14 @@ PeeringDB API → Airflow → PostgreSQL → dbt → PowerBI
 ```
 
 ### **Key Features**
-- 🔄 **Automated Data Ingestion** via Airflow DAGs
-- 🗄️ **Data Storage** with PostgreSQL
-- 🔧 **Data Transformation** using dbt
-- 📈 **Interactive Dashboards** in PowerBI
-- 🐳 **Containerized Infrastructure** with Docker
-- 📊 **Real-time Analytics** with 6-hour refresh cycles
+-  **Automated Data Ingestion** via Airflow DAGs
+-  **Data Storage** with PostgreSQL
+-  **Data Transformation** using dbt
+-  **Interactive Dashboards** in PowerBI
+-  **Containerized Infrastructure** with Docker
+-  **Real-time Analytics** with 6-hour refresh cycles
 
-## 🎯 **Business Value**
+##  **Business Value**
 
 ### **Infrastructure Insights**
 - **91.3% facility underutilization** - massive expansion opportunity
@@ -41,7 +41,7 @@ PeeringDB API → Airflow → PostgreSQL → dbt → PowerBI
 - **150 Facilities** - Data centers and colocation sites
 - **391,000 Mbps** - Total bandwidth capacity
 
-## 🏗️ **Architecture**
+##  **Architecture**
 
 ### **Technology Stack**
 - **Orchestration**: Apache Airflow
@@ -58,7 +58,7 @@ PeeringDB API → Airflow → PostgreSQL → dbt → PowerBI
 4. **Analytics**: PowerBI dashboards provide business insights
 5. **Automation**: 6-hour refresh cycles maintain data freshness
 
-## 📈 **Dashboards**
+##  **Dashboards**
 
 ### **1. Network Peering Overview**
 - Network connectivity analysis
@@ -84,7 +84,7 @@ PeeringDB API → Airflow → PostgreSQL → dbt → PowerBI
 - Strategic insights and recommendations
 - Key performance indicators
 
-## 🚀 **Quick Start**
+##  **Quick Start**
 
 ### **Prerequisites**
 - Docker Desktop
@@ -174,13 +174,13 @@ Schema: analytics
 4. Create PowerBI visualizations
 5. Update documentation
 
-## 📚 **Documentation**
+##  **Documentation**
 
 - **[User Guide](USER_GUIDE.md)** - Business user documentation
 - **[Maintenance Guide](MAINTENANCE_GUIDE.md)** - Technical maintenance
 - **[PowerBI Setup](powerbi/README.md)** - Dashboard configuration
 
-## 🎯 **Key Learnings & Skills Demonstrated**
+##  **Key Learnings & Skills Demonstrated**
 
 ### **Data Engineering**
 - **ETL Pipeline Design** - End-to-end data processing
@@ -200,7 +200,7 @@ Schema: analytics
 - **Documentation** - Comprehensive user and technical guides
 - **Version Control** - Git repository management
 
-## 🔍 **Technical Highlights**
+##  **Technical Highlights**
 
 - **Scalable Architecture** - Microservices with Docker
 - **Data Quality** - dbt tests and validation
@@ -208,7 +208,7 @@ Schema: analytics
 - **Real-time Analytics** - Live PowerBI dashboards
 - **Production Ready** - Comprehensive error handling
 
-## 📈 **Future Enhancements**
+##  **Future Enhancements**
 
 - [ ] **Real-time Streaming** - Apache Kafka integration
 - [ ] **Cloud Deployment** - AWS/Azure infrastructure
@@ -216,7 +216,7 @@ Schema: analytics
 - [ ] **API Development** - REST API for data access
 - [ ] **Monitoring** - Grafana dashboards for pipeline health
 
-## 🤝 **Contributing**
+##  **Contributing**
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -224,18 +224,12 @@ Schema: analytics
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 **License**
+##  **License**
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👨‍💻 **Author**
 
-**Your Name**
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Portfolio: [Your Portfolio](https://yourportfolio.com)
-
-## 🙏 **Acknowledgments**
+##  **Acknowledgments**
 
 - PeeringDB for providing the data API
 - Apache Airflow community for orchestration tools
@@ -243,5 +237,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Microsoft PowerBI for visualization platform
 
 ---
-
-⭐ **If you found this project helpful, please give it a star!**
