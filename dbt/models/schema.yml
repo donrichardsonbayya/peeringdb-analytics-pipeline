@@ -1,0 +1,76 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Raw PeeringDB data tables"
+    schema: public
+    tables:
+      - name: organizations
+        description: "Organizations table"
+        columns:
+          - name: org_id
+            description: "Primary key for organization"
+            tests:
+              - unique
+              - not_null
+      - name: networks
+        description: "Networks table"
+        columns:
+          - name: network_id
+            description: "Primary key for network"
+            tests:
+              - unique
+              - not_null
+          - name: asn
+            description: "Autonomous System Number"
+            tests:
+              - unique
+              - not_null
+      - name: internet_exchanges
+        description: "Internet Exchanges table"
+        columns:
+          - name: ix_id
+            description: "Primary key for internet exchange"
+            tests:
+              - unique
+              - not_null
+      - name: ix_lans
+        description: "IX LANs table"
+        columns:
+          - name: ixlan_id
+            description: "Primary key for IX LAN"
+            tests:
+              - unique
+              - not_null
+      - name: network_ixlan_connections
+        description: "Network-IX LAN connections table"
+        columns:
+          - name: netixlan_id
+            description: "Primary key for connection"
+            tests:
+              - unique
+              - not_null
+      - name: asset_facilities
+        description: "Facilities table"
+        columns:
+          - name: facility_id
+            description: "Primary key for facility"
+            tests:
+              - unique
+              - not_null
+      - name: facility_network_map
+        description: "Facility-Network mapping table"
+        columns:
+          - name: id
+            description: "Primary key for mapping"
+            tests:
+              - unique
+              - not_null
+          - name: facility_id
+            description: "Foreign key to facility"
+            tests:
+              - not_null
+          - name: network_id
+            description: "Foreign key to network"
+            tests:
+              - not_null
