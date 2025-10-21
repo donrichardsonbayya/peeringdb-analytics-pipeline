@@ -1,0 +1,70 @@
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: sokrates_postgres
+    environment:
+      AIRFLOW__WEBSERVER__SECRET_KEY: 'super_strong_consistent_key'
+      POSTGRES_USER: pe_user
+      POSTGRES_PASSWORD: pe_pass
+      POSTGRES_DB: pe_data
+    ports:
+      - "5432:5432"  # Use standard PostgreSQL port
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  airflow-webserver:
+    build:
+      context: ./airflow
+    container_name: airflow_webserver
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      AIRFLOW__WEBSERVER__SECRET_KEY: 'super_strong_consistent_key'
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://pe_user:pe_pass@postgres:5432/pe_data
+      AIRFLOW__CORE__FERNET_KEY: ''
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./scripts:/opt/airflow/scripts
+    command: webserver
+
+  airflow-scheduler:
+    build:
+      context: ./airflow
+    container_name: airflow_scheduler
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      AIRFLOW__WEBSERVER__SECRET_KEY: 'super_strong_consistent_key'
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://pe_user:pe_pass@postgres:5432/pe_data
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./scripts:/opt/airflow/scripts
+    command: scheduler
+
+  dbt:
+    build:
+      context: ./dbt
+    container_name: dbt_runner
+    depends_on:
+      - postgres
+    environment:
+      DBT_PROFILES_DIR: /opt/dbt/profiles
+      DBT_PROJECT_DIR: /opt/dbt
+    volumes:
+      - ./dbt:/opt/dbt
+      - ./dbt/profiles:/opt/dbt/profiles
+    command: ["tail", "-f", "/dev/null"]  # Keep container running
+
+volumes:
+  postgres_data:

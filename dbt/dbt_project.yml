@@ -1,0 +1,40 @@
+name: 'peeringdb_analytics'
+version: '1.0.0'
+config-version: 2
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'peeringdb_analytics'
+
+# These configurations specify where dbt should look for different types of files.
+model-paths: ["models"]
+analysis-paths: ["analysis"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+# Configures the target directory where dbt will place compiled models
+target-path: "target"
+
+# Configures the directory where dbt will place logs
+log-path: "logs"
+
+# Configures the directory where dbt will place compiled SQL files
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Configures the schema where dbt will place models
+models:
+  peeringdb_analytics:
+    # Config indicated by + and applies to all files under models/example/
+    +materialized: table
+    staging:
+      +materialized: view
+    marts:
+      +materialized: table
+
+# Configures the schema where dbt will place snapshots
+snapshots:
+  peeringdb_analytics:
+    +target_schema: snapshots
