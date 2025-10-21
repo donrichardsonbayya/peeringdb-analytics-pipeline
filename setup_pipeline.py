@@ -53,6 +53,10 @@ def setup_pipeline():
     print("\n1. Cleaning up existing containers...")
     run_command("docker-compose down", "Stopping existing containers")
     
+    # Remove any conflicting containers
+    print("   Removing conflicting containers...")
+    run_command("docker rm -f sokrates_postgres airflow_webserver airflow_scheduler dbt_runner 2>/dev/null || true", "Removing conflicting containers")
+    
     # Step 2: Build and start containers
     print("\n2. Building and starting containers...")
     if not run_command("docker-compose up -d --build", "Building and starting containers"):

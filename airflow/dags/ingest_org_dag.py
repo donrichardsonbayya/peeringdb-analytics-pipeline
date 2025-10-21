@@ -1,12 +1,6 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
-import sys
-import os
-
-# Add scripts directory to Python path
-sys.path.append('/opt/airflow/scripts')
 
 default_args = {
     'owner': 'peeringdb_analytics',
@@ -18,28 +12,6 @@ default_args = {
     'retry_delay': timedelta(minutes=5),
     'catchup': False
 }
-
-def run_organizations_ingestion():
-    """Run the organizations ingestion script with proper error handling."""
-    try:
-        from ingest_org import fetch_organizations, insert_into_postgres
-        import logging
-        
-        logging.basicConfig(level=logging.INFO)
-        logger = logging.getLogger(__name__)
-        
-        logger.info("Starting organizations ingestion...")
-        organizations = fetch_organizations()
-        if organizations:
-            insert_into_postgres(organizations)
-            logger.info(f"Successfully processed {len(organizations)} organizations")
-            return f"Processed {len(organizations)} organizations"
-        else:
-            logger.warning("No organizations fetched")
-            return "No organizations fetched"
-    except Exception as e:
-        logger.error(f"Organizations ingestion failed: {e}")
-        raise
 
 with DAG(
     dag_id='ingest_organizations_dag',
@@ -69,9 +41,9 @@ with DAG(
     )
 
     # Organizations ingestion task
-    ingest_organizations = PythonOperator(
+    ingest_organizations = BashOperator(
         task_id='run_organizations_ingestion',
-        python_callable=run_organizations_ingestion,
+        bash_command='cd /opt/airflow/scripts && python ingest_org.py',
     )
 
     # Success notification

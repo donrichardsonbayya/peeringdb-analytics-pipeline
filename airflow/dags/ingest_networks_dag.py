@@ -1,12 +1,6 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
-import sys
-import os
-
-# Add scripts directory to Python path
-sys.path.append('/opt/airflow/scripts')
 
 default_args = {
     'owner': 'peeringdb_analytics',
@@ -18,28 +12,6 @@ default_args = {
     'retry_delay': timedelta(minutes=5),
     'catchup': False
 }
-
-def run_networks_ingestion():
-    """Run the networks ingestion script with proper error handling."""
-    try:
-        from ingest_networks import fetch_networks, insert_into_postgres
-        import logging
-        
-        logging.basicConfig(level=logging.INFO)
-        logger = logging.getLogger(__name__)
-        
-        logger.info("Starting networks ingestion...")
-        networks = fetch_networks()
-        if networks:
-            insert_into_postgres(networks)
-            logger.info(f"Successfully processed {len(networks)} networks")
-            return f"Processed {len(networks)} networks"
-        else:
-            logger.warning("No networks fetched")
-            return "No networks fetched"
-    except Exception as e:
-        logger.error(f"Networks ingestion failed: {e}")
-        raise
 
 with DAG(
     dag_id='ingest_networks_dag',
@@ -69,9 +41,9 @@ with DAG(
     )
 
     # Networks ingestion task
-    ingest_networks = PythonOperator(
+    ingest_networks = BashOperator(
         task_id='run_networks_ingestion',
-        python_callable=run_networks_ingestion,
+        bash_command='cd /opt/airflow/scripts && python ingest_networks.py',
     )
 
     # Success notification
