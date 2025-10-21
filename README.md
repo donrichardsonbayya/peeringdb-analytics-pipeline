@@ -84,35 +84,55 @@ PeeringDB API → Airflow → PostgreSQL → dbt → PowerBI
 - Strategic insights and recommendations
 - Key performance indicators
 
-##  **Quick Start**
+## 🚀 **Quick Start & Demo**
 
 ### **Prerequisites**
 - Docker Desktop
-- PowerBI Desktop
+- Python 3.8+
 - Git
 
-### **Installation**
-
-1. **Clone the repository**
+### **One-Command Setup**
 ```bash
-git clone https://github.com/yourusername/peeringdb-analytics-pipeline.git
+# Clone and setup the complete pipeline
+git clone https://github.com/donrichardsonbayya/peeringdb-analytics-pipeline.git
 cd peeringdb-analytics-pipeline
+python setup_pipeline.py
 ```
 
-2. **Start the pipeline**
+### **Manual Setup**
+1. **Start the pipeline**
 ```bash
 docker-compose up -d
 ```
 
-3. **Verify services**
+2. **Wait for services** (2-3 minutes)
 ```bash
+# Check if services are ready
 docker ps
 ```
 
-4. **Access services**
-- **Airflow UI**: http://localhost:8080
+3. **Access services**
+- **Airflow UI**: http://localhost:8080 (admin/admin)
 - **PostgreSQL**: localhost:5432 (pe_user/pe_pass)
-- **PowerBI**: Connect to localhost:5432
+
+### **Running the Demo**
+```bash
+# Run the interactive demo script
+python demo_pipeline.py
+
+# Or validate the pipeline
+python setup_pipeline.py validate
+```
+
+### **Manual DAG Execution**
+1. Open http://localhost:8080
+2. Login with admin/admin
+3. Find the DAGs:
+   - `peeringdb_complete_pipeline` - Runs the entire pipeline
+   - `ingest_organizations_dag` - Ingest organization data
+   - `ingest_networks_dag` - Ingest network data
+   - `dbt_peeringdb_analytics` - Run dbt transformations
+4. Click the play button to trigger DAGs manually
 
 ### **Connect PowerBI**
 ```
