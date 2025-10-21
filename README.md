@@ -127,17 +127,17 @@ Schema: analytics
 ## 📊 **Data Models**
 
 ### **Staging Models (dbt)**
-- `stg_organizations` - Cleaned organization data
+- `stg_organizations` - Organization data with validation
 - `stg_networks` - Network data with ASN classification
-- `stg_internet_exchanges` - IX data with geographic info
-- `stg_network_ixlan_connections` - Peering connection data
+- `stg_internet_exchanges` - Internet Exchange data with location info
+- `stg_network_ixlan_connections` - Network-to-IX connection data
 - `stg_facilities` - Facility data with utilization metrics
 
 ### **Mart Models (dbt)**
-- `mart_network_peering_summary` - Network analytics
-- `mart_ix_traffic_summary` - IX performance metrics
-- `mart_geographic_analytics` - Geographic distribution
-- `mart_facility_analytics` - Facility utilization analysis
+- `mart_network_peering_summary` - Network connectivity analytics
+- `mart_ix_traffic_summary` - Internet Exchange performance metrics
+- `mart_geographic_analytics` - Geographic distribution analysis
+- `mart_facility_analytics` - Facility utilization and performance
 
 ## 🔧 **Development**
 
@@ -161,10 +161,10 @@ Schema: analytics
 ├── scripts/
 │   ├── *.py                   # Data ingestion scripts
 │   └── *.ps1                  # Setup scripts
+├── logs/                      # Application logs
 ├── docker-compose.yml         # Service orchestration
 ├── README.md                  # This file
-├── USER_GUIDE.md              # User documentation
-└── MAINTENANCE_GUIDE.md       # Technical maintenance
+└── ARCHITECTURE.md            # System architecture
 ```
 
 ### **Adding New Data Sources**
@@ -174,11 +174,10 @@ Schema: analytics
 4. Create PowerBI visualizations
 5. Update documentation
 
-##  **Documentation**
+## 📚 **Documentation**
 
-- **[User Guide](USER_GUIDE.md)** - Business user documentation
-- **[Maintenance Guide](MAINTENANCE_GUIDE.md)** - Technical maintenance
-- **[PowerBI Setup](powerbi/README.md)** - Dashboard configuration
+- **[Architecture Overview](ARCHITECTURE.md)** - System architecture and data flow
+- **[PowerBI Setup](powerbi/README.md)** - Dashboard configuration guide
 
 ##  **Key Learnings & Skills Demonstrated**
 

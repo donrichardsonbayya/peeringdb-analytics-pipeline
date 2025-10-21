@@ -29,11 +29,14 @@ services:
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://pe_user:pe_pass@postgres:5432/pe_data
       AIRFLOW__CORE__FERNET_KEY: ''
       AIRFLOW__CORE__LOAD_EXAMPLES: 'False'
+      AIRFLOW__LOGGING__LOGGING_LEVEL: INFO
+      AIRFLOW__LOGGING__LOGGING_CONFIG_CLASS: airflow_local_settings.LOGGING_CONFIG
     ports:
       - "8080:8080"
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./scripts:/opt/airflow/scripts
+      - ./logs:/opt/airflow/logs
     command: webserver
 
   airflow-scheduler:
@@ -47,9 +50,11 @@ services:
       AIRFLOW__WEBSERVER__SECRET_KEY: 'super_strong_consistent_key'
       AIRFLOW__CORE__EXECUTOR: LocalExecutor
       AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://pe_user:pe_pass@postgres:5432/pe_data
+      AIRFLOW__LOGGING__LOGGING_LEVEL: INFO
     volumes:
       - ./airflow/dags:/opt/airflow/dags
       - ./scripts:/opt/airflow/scripts
+      - ./logs:/opt/airflow/logs
     command: scheduler
 
   dbt:
